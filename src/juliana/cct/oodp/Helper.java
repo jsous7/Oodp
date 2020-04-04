@@ -10,7 +10,7 @@ import static juliana.cct.oodp.EntryPoint.bufferedReader;
 
 /**
  *
- * @author julia
+ * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
  */
 class Helper {
     public static void pause() throws IOException{

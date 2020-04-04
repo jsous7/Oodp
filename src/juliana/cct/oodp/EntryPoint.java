@@ -8,13 +8,12 @@ package juliana.cct.oodp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
 import java.util.HashMap;
-import javax.tools.*;
+import juliana.cct.oodp.Controllers.CountryController;
 
 /**
- *
- * @author julia
+ * Entry point, it is being used as a 'View' in the MVC context
+ * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
  */
 public class EntryPoint {
 
@@ -29,21 +28,27 @@ public class EntryPoint {
         }
     }
     
+    /**
+     * Method to print the menu
+     */
     private static void displayMenu() {
         System.out.println("Select one option:\n");
         System.out.println("1.Create a country");
         System.out.println("2.Show all countries");
-        System.out.println("3.Show country details by name");
-        System.out.println("4.Show country details by code");
+        System.out.println("3.Show country details by code");
+        System.out.println("4.Show country details by name");
         System.out.println("5.Exit");
     }
 
+    /**
+     * Method to get the selected option from the menu and then, calls the suitable action
+     * @param option
+     * @throws IOException 
+     */
     private static void mainLogic(String option) throws IOException {
         switch (option) {
             case "1":
-                if(createCountry()){
-                    System.out.println("Contry created successfully!");
-                }
+                createCountry();
                 break;
             case "2":
                 System.out.println("Option selected!");
@@ -65,14 +70,23 @@ public class EntryPoint {
         }
     }
     
-    private static boolean createCountry() throws IOException{
+    /**
+     * Method to get the input data from the user
+     * @throws IOException 
+     */
+    private static void createCountry() throws IOException{
         System.out.println("Type three characters for country code:");
         String code = bufferedReader.readLine();
         System.out.println("Type country name:");
         String name = bufferedReader.readLine();
+        System.out.println("Type the surface area");
+        String surfaceArea = bufferedReader.readLine();
+        System.out.println("Type the head of state");
+        String headOfState = bufferedReader.readLine();
         
+        //Logic to show a menu with continent options to be selected
         boolean stopLoop = false;
-        String continent = "";
+        Continents continent = null;
         while(!stopLoop){
             System.out.println("Choose a continent:");
             Continents values[] = Continents.values();
@@ -84,60 +98,60 @@ public class EntryPoint {
             String continentOption = bufferedReader.readLine();
             switch(continentOption){
                 case "1" :
-                    continent = Continents.ASIAN.toString();
+                    continent = Continents.ASIAN;
                     stopLoop = true;
                     break;
                 case "2" :
-                    continent = Continents.EUROPE.toString();
+                    continent = Continents.EUROPE;
                     stopLoop = true;
                     break;
                 case "3" :
-                    continent = Continents.NORTH_AMERICA.toString();
+                    continent = Continents.NORTH_AMERICA;
                     stopLoop = true;
                     break; 
                 case "4" :
-                    continent = Continents.AFRICA.toString();
+                    continent = Continents.AFRICA;
                     stopLoop = true;
                     break;
                 case "5" :
-                    continent = Continents.OCEANIA.toString();
+                    continent = Continents.OCEANIA;
                     stopLoop = true;
                     break;
                 case "6" :
-                    continent = Continents.ANTARCTICA.toString();
+                    continent = Continents.ANTARCTICA;
                     stopLoop = true;
                     break;
                 case "7":
-                    continent = Continents.SOUTH_AMERICA.toString();
+                    continent = Continents.SOUTH_AMERICA;
                     stopLoop = true;
                     break;
                 case "8" :
-                    continent = Continents.CENTRAL_AMERICA.toString();
+                    continent = Continents.CENTRAL_AMERICA;
                     stopLoop = true;
                     break;
                 default:
-                    System.out.println("Invalid Option, Try Again");
+                    System.out.println("Invalid Option, try Again");
                     Helper.pause();
                     break;
             }
         }
-
-        System.out.println("Type the surface area");
-        String surfaceArea = bufferedReader.readLine();
-        System.out.println("Type the head of state");
-        String headOfState = bufferedReader.readLine();
         
-        HashMap<String, String> countryData = new HashMap<String, String>();
+        //Populate a HashMap with data inserted by the user
+        HashMap<String, String> countryData = new HashMap<>();
         countryData.put("code", code);
         countryData.put("name", name);
-        countryData.put("continent", continent);
+        countryData.put("continent", continent.toString());
         countryData.put("surface_area", surfaceArea);
         countryData.put("head_of_state", headOfState);
         
-        //TODO: send the hashmap to the controller.
-        //CountryController countryController = new CountryController(countryData);
-               
+        //Calls the controller action to create a new country based on the HasMap data
+        try{
+            CountryController.createCountry(countryData);
+            System.out.println("Country created successfully!");
+        }catch (Exception e){
+            System.out.println("An error happened while trying to save a new country: " + e.getMessage());
+        }
+        
         Helper.pause();
-        return true;
     }
 }
