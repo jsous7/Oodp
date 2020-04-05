@@ -1,8 +1,10 @@
 package juliana.cct.oodp;
 
+import Models.EntityCountry;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import juliana.cct.oodp.Controllers.CountryController;
 
@@ -46,14 +48,13 @@ public class EntryPoint {
                 createCountry();
                 break;
             case "2":
-                System.out.println("Option selected!");
-                Helper.pause();
+                listAll();
                 break;
             case "3":
-                //TODO
+                findByCode();
                 break;
             case "4":
-                //TODO
+                findByName();
                 break;
             case "5":
                 stopLoop = true;
@@ -136,11 +137,76 @@ public class EntryPoint {
         countryData.put("headOfState", headOfState);
         
         //Calls the controller action to create a new country based on the HasMap data
-        try{
+        try {
             CountryController.createCountry(countryData);
             System.out.println("\nCountry created successfully!");
-        }catch (Exception e){
+        } catch (Exception e){
             System.out.println("\nAn error happened while trying to save a new country: " + e.getMessage());
+        }
+        
+        Helper.pause();
+    }
+    
+    private static void findByCode() throws IOException{
+        System.out.println("Please insert the country code: ");
+        String code = bufferedReader.readLine();
+        
+        HashMap<String, String> result = null;
+        
+        try {
+            result = CountryController.findByCode(code);
+            
+            System.out.println("\nCountry with the code \"" + code + "\" found:");
+            System.out.println("  Country code: " + result.get("code").toString());
+            System.out.println("  Country name: " + result.get("name").toString());
+            System.out.println("  Country continent: " + result.get("continent").toString());
+            System.out.println("  Country surface area: " + result.get("surfaceArea").toString());
+            System.out.println("  Country head of state: " + result.get("headOfState").toString());
+        } catch (Exception e) {
+            System.out.println("\nAn error happened while trying to get a country by code: " + e.getMessage());
+        }
+        
+        Helper.pause();
+    }
+    
+    private static void findByName() throws IOException{
+        System.out.println("Please insert the country name: ");
+        String name = bufferedReader.readLine();
+        
+        HashMap<String, String> result = null;
+        
+        try {
+            result = CountryController.findByName(name);
+            
+            System.out.println("\nCountry with the name \"" + name + "\" found:");
+            System.out.println("  Country code: " + result.get("code").toString());
+            System.out.println("  Country name: " + result.get("name").toString());
+            System.out.println("  Country continent: " + result.get("continent").toString());
+            System.out.println("  Country surface area: " + result.get("surfaceArea").toString());
+            System.out.println("  Country head of state: " + result.get("headOfState").toString());
+        } catch (Exception e) {
+            System.out.println("\nAn error happened while trying to get a country by name: " + e.getMessage());
+        }
+        
+        Helper.pause();
+    }
+    
+    private static void listAll() throws IOException{
+        HashMap<String, String> result = null;
+        ArrayList<EntityCountry> countries = new ArrayList<EntityCountry>();
+        
+        try {
+            countries = CountryController.listAll();
+            System.out.println("\nList of all countries limited to 200 results:\n");
+            for (EntityCountry country : countries) {
+                System.out.println("\n  Country code: " + country.getCode());
+                System.out.println("  Country name: " + country.getName());
+                System.out.println("  Country continent: " + country.getContinent());
+                System.out.println("  Country surface area: " + country.getSurfaceArea());
+                System.out.println("  Country head of state: " + country.getHeadOfState());
+            }    
+        } catch (Exception e) {
+            System.out.println("\nAn error happened while trying to get a country by name: " + e.getMessage());
         }
         
         Helper.pause();

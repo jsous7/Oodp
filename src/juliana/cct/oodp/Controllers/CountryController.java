@@ -46,15 +46,45 @@ public class CountryController {
         repository.save(country);
     }
     
-//    public ArrayList listAll(){
-//        
-//    } 
-//    
-//    public EntityCountry findByCode(String code){
-//        
-//    }
-//    
-//    public EntityCountry findByName(String name){
-//        
-//    }
+    public static ArrayList listAll() throws Exception{
+        CountryRepository repository = new CountryRepository();
+        
+        return repository.listAll();
+    } 
+    
+    public static HashMap findByCode(String code) throws Exception{
+        code = InputValidator.validateString(code);
+        
+        CountryRepository repository = new CountryRepository();
+        EntityCountry entityCountry = repository.findByCode(code);
+        
+        HashMap<String, String> countryData = new HashMap<>();
+        if (entityCountry != null){
+            countryData.put("code", entityCountry.getCode());
+            countryData.put("name", entityCountry.getName());
+            countryData.put("continent", entityCountry.getContinent());
+            countryData.put("surfaceArea", entityCountry.getSurfaceArea().toString());
+            countryData.put("headOfState", entityCountry.getHeadOfState());
+        }
+  
+        return countryData;
+    }
+    
+    public static HashMap findByName(String name) throws Exception{
+        name = InputValidator.validateString(name);
+        
+        CountryRepository repository = new CountryRepository();
+        EntityCountry entityCountry = repository.findByName(name);
+        
+        HashMap<String, String> countryData = new HashMap<>();
+        if (entityCountry != null){
+            countryData.put("code", entityCountry.getCode());
+            countryData.put("name", entityCountry.getName());
+            countryData.put("continent", entityCountry.getContinent());
+            countryData.put("surfaceArea", entityCountry.getSurfaceArea().toString());
+            countryData.put("headOfState", entityCountry.getHeadOfState());
+        }
+  
+        return countryData;
+    }
 }

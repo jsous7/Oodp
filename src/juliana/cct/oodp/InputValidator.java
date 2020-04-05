@@ -21,6 +21,11 @@ public class InputValidator {
         return string.substring(0, 3);
     }
     
+    /**
+     * Code based on examples from https://www.geeksforgeeks.org/check-given-string-valid-number-integer-floating-point-java-set-2-regular-expression-approach/
+     * @param string
+     * @throws Exception 
+     */
     public static void validateNumber(String string) throws Exception{
         String regex = "[+-]?[0-9]+(\\.[0-9]+)?([Ee][+-]?[0-9]+)?";
         Pattern p = Pattern.compile(regex); 
