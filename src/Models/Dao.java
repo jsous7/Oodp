@@ -1,27 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
  */
 class Dao {
-    public void insert(String table, String[] dataKeys, String[] dataValues){
-        System.out.println(table);
+    
+    private Connection db;
+
+    Dao() throws Exception {
+        try {
+            this.db = Db.getInstance();
+        } catch (Exception e) {
+            throw new Exception("error on getting Db singleton instance: " + e.getMessage());
+        }
+    }
+    
+    public void insert(String table, String[] dataKeys, String[] dataValues) throws SQLException{
+        String keys = "";
+        String values = "";
         
         for (String element : dataKeys){
-            System.out.println(element);
+            keys = keys + element + ",";
         }
-        
+        keys = keys.substring(0, keys.length()-1);
         for (String element : dataValues){
-            System.out.println(element);
+            values = values + "\'" + element + "\'" + ",";
         }
+        values = values.substring(0, values.length()-1);
         
-        System.exit(0);
-        //        String query = "insert into country('code', 'name')values('bra', 'Brazil')";  
+        String query = "insert into " + table + "(" + keys + ")" + " values(" + values + ")";
+        Statement stmt = db.createStatement();
+        stmt.execute(query);
     }
 }
