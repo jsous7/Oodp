@@ -9,7 +9,7 @@ import java.util.HashMap;
 import juliana.cct.oodp.Controllers.CountryController;
 
 /**
- * Entry point, it is being used as a 'View' in the MVC context
+ * Entry point, it is being used as a 'View' in the MVC context, there should not have business logic on it, only displays data provided by the controller
  * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
  */
 public class EntryPoint {
@@ -147,6 +147,10 @@ public class EntryPoint {
         Helper.pause();
     }
     
+    /**
+     * Method to show the country data filtered by code
+     * @throws IOException 
+     */
     private static void findByCode() throws IOException{
         System.out.println("Please insert the country code: ");
         String code = bufferedReader.readLine();
@@ -154,6 +158,7 @@ public class EntryPoint {
         HashMap<String, String> result = null;
         
         try {
+            System.out.println("Fetching the data, please wait...");
             result = CountryController.findByCode(code);
             
             System.out.println("\nCountry with the code \"" + code + "\" found:");
@@ -169,6 +174,10 @@ public class EntryPoint {
         Helper.pause();
     }
     
+    /**
+     * Method to show the country data filtered by name
+     * @throws IOException 
+     */
     private static void findByName() throws IOException{
         System.out.println("Please insert the country name: ");
         String name = bufferedReader.readLine();
@@ -176,6 +185,7 @@ public class EntryPoint {
         HashMap<String, String> result = null;
         
         try {
+            System.out.println("Fetching the data, please wait...");
             result = CountryController.findByName(name);
             
             System.out.println("\nCountry with the name \"" + name + "\" found:");
@@ -191,14 +201,20 @@ public class EntryPoint {
         Helper.pause();
     }
     
+    /**
+     * Method to show list all the countries
+     * @throws IOException 
+     */
     private static void listAll() throws IOException{
-        HashMap<String, String> result = null;
         ArrayList<EntityCountry> countries = new ArrayList<EntityCountry>();
         
         try {
+            System.out.println("Fetching the data, please wait...");
             countries = CountryController.listAll();
             System.out.println("\nList of all countries limited to 200 results:\n");
-            for (EntityCountry country : countries) {
+            
+            for (int i=0; i < countries.size(); i++ ) {
+                EntityCountry country = countries.get(i);
                 System.out.println("\n  Country code: " + country.getCode());
                 System.out.println("  Country name: " + country.getName());
                 System.out.println("  Country continent: " + country.getContinent());

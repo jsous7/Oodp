@@ -7,11 +7,16 @@ import java.util.HashMap;
 import juliana.cct.oodp.InputValidator;
 
 /**
- * Controller in a MVC context is responsible for all business logic
+ * Controller in a MVC context is responsible for all business logic returning to the view only what is necessary to display the data
  * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
  */
 public class CountryController {
     
+    /**
+     * Business Logic to Create a country
+     * @param countryData
+     * @throws Exception 
+     */
     public static void createCountry(HashMap countryData) throws Exception{
         //Get the input data coming from the view (EntryPoint)
         String code = countryData.get("code").toString();
@@ -46,12 +51,24 @@ public class CountryController {
         repository.save(country);
     }
     
+    /**
+     * Business logic to list all countries
+     * @return
+     * @throws Exception 
+     */
     public static ArrayList listAll() throws Exception{
+        //Only redirects the call from the view to the model once there is no busines logic required here nor any type of validation
         CountryRepository repository = new CountryRepository();
         
         return repository.listAll();
     } 
     
+    /**
+     * Business Logic to find a country by code
+     * @param code
+     * @return
+     * @throws Exception 
+     */
     public static HashMap findByCode(String code) throws Exception{
         code = InputValidator.validateString(code);
         
@@ -70,6 +87,12 @@ public class CountryController {
         return countryData;
     }
     
+    /**
+     * Business Logic to find a country by name
+     * @param name
+     * @return
+     * @throws Exception 
+     */
     public static HashMap findByName(String name) throws Exception{
         name = InputValidator.validateString(name);
         

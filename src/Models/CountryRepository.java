@@ -6,13 +6,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
+ * Class to encapsulate all the logic required to access data source, provided by DAO in this case
  * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
  */
 public class CountryRepository {
     
     String table = "country";
     
+    /**
+     * Prepare all the data do be used by the DAO when saving a new country
+     * @param country
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     * @throws Exception 
+     */
     public void save(EntityCountry country) throws IllegalArgumentException, IllegalAccessException, Exception{
         //String arrays required by the Dao
         String[] dataKeys = new String[30];
@@ -45,6 +52,12 @@ public class CountryRepository {
         daoLayer.insert(this.table, dataKeys, dataValues);
     }
 
+    /**
+     * Prepare all the data do be used by the DAO when finding a country by code
+     * @param code
+     * @return
+     * @throws Exception 
+     */
     public EntityCountry findByCode(String code) throws Exception{
         Dao daoLayer = new Dao();
         ResultSet rs = null;
@@ -71,6 +84,12 @@ public class CountryRepository {
         return entityCountry;
     }
     
+    /**
+     * Prepare all the data do be used by the DAO when finding a country by name
+     * @param name
+     * @return
+     * @throws Exception 
+     */
     public EntityCountry findByName(String name) throws Exception{
         Dao daoLayer = new Dao();
         ResultSet rs = null;
@@ -97,11 +116,15 @@ public class CountryRepository {
         return entityCountry;
     }
     
+    /**
+     * Prepare all the data do be used by the DAO when listing all countries
+     * @return
+     * @throws Exception 
+     */
     public ArrayList<EntityCountry> listAll() throws Exception{
         Dao daoLayer = new Dao();
         ResultSet rs = null;
         
-        EntityCountry entityCountry = new EntityCountry();
         ArrayList<EntityCountry> countries = new ArrayList<EntityCountry>();
         
         try {
@@ -112,6 +135,7 @@ public class CountryRepository {
         
         if (rs.next()){
             while (rs.next()) {
+                EntityCountry entityCountry = new EntityCountry();
                 entityCountry.setCode(rs.getString(1));
                 entityCountry.setName(rs.getString(2));
                 entityCountry.setContinent(rs.getString(3));
@@ -124,7 +148,7 @@ public class CountryRepository {
         } else {
             throw new Exception("No countries found!");
         }
-    
+
         return countries;
     }
 }

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
+ * Class using singleton pattern to allow only one DB instance to be used across the project
  * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
  */
 public class Db {
@@ -14,6 +14,11 @@ public class Db {
     
     private static Connection dbInstance = null;
     
+    /**
+     * Singleton pattern, returns only one instance of the DB
+     * @return
+     * @throws Exception 
+     */
     public static Connection getInstance() throws Exception{
         if (dbInstance == null){
             try {
