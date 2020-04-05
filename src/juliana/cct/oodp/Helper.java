@@ -14,7 +14,7 @@ import static juliana.cct.oodp.EntryPoint.bufferedReader;
  */
 class Helper {
     public static void pause() throws IOException{
-        System.out.println("Press any key to continue...");
+        System.out.println("\nPress any key to continue...\n");
         bufferedReader.readLine();
     }
 }

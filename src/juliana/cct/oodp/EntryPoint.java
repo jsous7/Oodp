@@ -147,9 +147,9 @@ public class EntryPoint {
         //Calls the controller action to create a new country based on the HasMap data
         try{
             CountryController.createCountry(countryData);
-            System.out.println("Country created successfully!");
+            System.out.println("\nCountry created successfully!");
         }catch (Exception e){
-            System.out.println("An error happened while trying to save a new country: " + e.getMessage());
+            System.out.println("\nAn error happened while trying to save a new country: " + e.getMessage());
         }
         
         Helper.pause();

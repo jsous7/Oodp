@@ -34,7 +34,7 @@ public class CountryController {
         try {
             InputValidator.validateNumber(surfaceArea);
         }catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception("'Surface area' requires a number, you typed \"" + surfaceArea + "\"");
         }
         float surfaceAreaFloat = Float.parseFloat(surfaceArea);
 
@@ -45,7 +45,7 @@ public class CountryController {
         country.setContinent(continent);
         country.setSurface_area(surfaceAreaFloat);
         country.setHead_of_state(headOfState);
-        
+
         //Calls the repository to prepare the query for the DAO and save the entity on the DB
         CountryRepository repository = new CountryRepository();
         repository.save(country);

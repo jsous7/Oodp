@@ -13,11 +13,11 @@ import juliana.cct.oodp.Continents;
  */
 public class EntityCountry {
     
-    private String code;
-    private String name;
-    private String continent;
-    private Float surface_area;
-    private String head_of_state;
+    protected String code;
+    protected String name;
+    protected String continent;
+    protected Float surface_area;
+    protected String head_of_state;
 
     public String getCode() {
         return code;
