@@ -1,0 +1,34 @@
+It was used 4 design patterns to build the Object-Oriented Design Pattern project, as listed below.
+
+Singleton Design Pattern 
+I have decided for that pattern represented by DB.java in git.Oodp project, because sometimes we need to have only one instance of our class for example a single DB connection shared by multiple objects as creating a separate DB connection for every object may be costly. Similarly, there can be a single configuration manager or error manager in an application that handles all problems instead of creating multiple managers.
+
+Definition
+The singleton pattern is a design pattern that restricts the instantiation of a class to one object.
+Let’s see various design options for implementing such a class. If you have a good handle on static class variables and access modifiers this should not be a difficult task.
+
+Data Access Object Pattern
+DAO is my principal layer used of that design pattern that allows the program interact in abstract way between business side their client, and databases low level data source. It is represented by DAO.java on git.Oodp project.
+Data Access Object Pattern or DAO pattern is used to separate low level data accessing API or operations from high level business services. Following are the participants in Data Access Object Pattern.
+Design components
+•	BusinessObject : The BusinessObject represents the data client. It is the object that requires access to the data source to obtain and store data. A BusinessObject may be implemented as a session bean, entity bean or some other Java object in addition to a servlet or helper bean that accesses the data source.
+•	DataAccessObject : The DataAccessObject is the primary object of this pattern. The DataAccessObject abstracts the underlying data access implementation for the BusinessObject to enable transparent access to the data source.
+•	DataSource : This represents a data source implementation. A data source could be a database such as an RDBMS, OODBMS, XML repository, flat file system, and so forth. A data source can also be another system service or some kind of repository.
+•	TransferObject : This represents a Transfer Object used as a data carrier. The DataAccessObject may use a Transfer Object to return data to the client. The DataAccessObject may also receive the data from the client in a Transfer Object to update the data in the data source.
+
+The Repository pattern
+I have chosen that pattern, (represented by CountryRepository.java git Oodp project), because we can encapsulate the logic required to access data sources. The repository can centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer. 
+The Repository pattern is a well-documented way of working with a data source. In the book Patterns of Enterprise Application Architecture, Martin Fowler describes a repository as follows:
+A repository performs the tasks of an intermediary between the domain model layers and data mapping, acting in a similar way to a set of domain objects in memory. Client objects declaratively build queries and send them to the repositories for answers. Conceptually, a repository encapsulates a set of objects stored in the database and operations that can be performed on them, providing a way that is closer to the persistence layer. Repositories, also, support the purpose of separating, clearly and in one direction, the dependency between the work domain and the data allocation or mapping.
+MVC Design Pattern
+The Model View Controller (MVC) design pattern specifies that an application consist of a data model, presentation information, and control information. The pattern requires that each of these be separated into different objects.
+MVC is more of an architectural pattern, but not for complete application. MVC mostly relates to the UI / interaction layer of an application. You’re still going to need business logic layer, maybe some service layer and data access layer.
+•	The Model contains only the pure application data; it contains no logic describing how to present the data to a user.
+•	The View presents the model’s data to the user. The view knows how to access the model’s data, but it does not know what this data means or what the user can do to manipulate it.
+•	The Controller exists between the view and the model. It listens to events triggered by the view (or another external source) and executes the appropriate reaction to these events. In most cases, the reaction is to call a method on the model. Since the view and the model are connected through a notification mechanism, the result of this action is then automatically reflected in the view.
+
+GitHub:
+https://github.com/jsous7/Oodp
+
+Reference:
+Design Pattern, Saket Kumar https://www.geeksforgeeks.org/.
