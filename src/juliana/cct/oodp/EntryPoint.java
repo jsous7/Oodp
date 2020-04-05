@@ -81,7 +81,7 @@ public class EntryPoint {
         
         //Logic to show a menu with continent options to be selected
         boolean stopLoop = false;
-        Continents continent = null;
+        String continent = null;
         while(!stopLoop){
             System.out.println("Choose a continent:");
             Continents values[] = Continents.values();
@@ -93,35 +93,31 @@ public class EntryPoint {
             String continentOption = bufferedReader.readLine();
             switch(continentOption){
                 case "1" :
-                    continent = Continents.ASIAN;
+                    continent = "Asia";
                     stopLoop = true;
                     break;
                 case "2" :
-                    continent = Continents.EUROPE;
+                    continent = "Europe";
                     stopLoop = true;
                     break;
                 case "3" :
-                    continent = Continents.NORTH_AMERICA;
+                    continent = "North America";
                     stopLoop = true;
                     break; 
                 case "4" :
-                    continent = Continents.AFRICA;
+                    continent = "Africa";
                     stopLoop = true;
                     break;
                 case "5" :
-                    continent = Continents.OCEANIA;
+                    continent = "Oceania";
                     stopLoop = true;
                     break;
                 case "6" :
-                    continent = Continents.ANTARCTICA;
+                    continent = "Antarctica";
                     stopLoop = true;
                     break;
                 case "7":
-                    continent = Continents.SOUTH_AMERICA;
-                    stopLoop = true;
-                    break;
-                case "8" :
-                    continent = Continents.CENTRAL_AMERICA;
+                    continent = "South America";
                     stopLoop = true;
                     break;
                 default:
@@ -135,9 +131,9 @@ public class EntryPoint {
         HashMap<String, String> countryData = new HashMap<>();
         countryData.put("code", code);
         countryData.put("name", name);
-        countryData.put("continent", continent.toString());
-        countryData.put("surface_area", surfaceArea);
-        countryData.put("head_of_state", headOfState);
+        countryData.put("continent", continent);
+        countryData.put("surfaceArea", surfaceArea);
+        countryData.put("headOfState", headOfState);
         
         //Calls the controller action to create a new country based on the HasMap data
         try{

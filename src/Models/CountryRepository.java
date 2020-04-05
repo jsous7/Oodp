@@ -21,8 +21,10 @@ public class CountryRepository {
         Field [] attributesKeys =  EntityCountry.class.getDeclaredFields();
         int i = 0;
         for (Field key : attributesKeys) {
-            dataKeys[i] = key.getName();
-            dataValues[i] = key.get(country).toString();
+            String keys = key.getName();
+            dataKeys[i] = keys.substring(0,1).toUpperCase() + keys.substring(1);
+            String values = key.get(country).toString();
+            dataValues[i] = values.substring(0,1).toUpperCase() + values.substring(1);
             i++;
         }
         

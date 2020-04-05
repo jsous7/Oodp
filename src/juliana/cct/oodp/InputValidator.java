@@ -1,5 +1,8 @@
 package juliana.cct.oodp;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author Juliana_Sousa <juliana.oli.sousa@gmail.com>
@@ -19,8 +22,11 @@ public class InputValidator {
     }
     
     public static void validateNumber(String string) throws Exception{
-        if (!string.matches("[0-9]+")) {
-            throw new Exception("The string is not a number");
+        String regex = "[+-]?[0-9]+(\\.[0-9]+)?([Ee][+-]?[0-9]+)?";
+        Pattern p = Pattern.compile(regex); 
+        Matcher m = p.matcher(string);
+        if(!(m.find() && m.group().equals(string))){
+            throw new Exception("The string is not a valid number");
         }
     }
 }

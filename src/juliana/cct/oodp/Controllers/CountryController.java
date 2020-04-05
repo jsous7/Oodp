@@ -17,8 +17,8 @@ public class CountryController {
         String code = countryData.get("code").toString();
         String name = countryData.get("name").toString();
         String continent = countryData.get("continent").toString();
-        String surfaceArea = countryData.get("surface_area").toString();
-        String headOfState = countryData.get("head_of_state").toString();
+        String surfaceArea = countryData.get("surfaceArea").toString();
+        String headOfState = countryData.get("headOfState").toString();
         
         //Validate the data
         code = InputValidator.validateString(code);
@@ -29,7 +29,7 @@ public class CountryController {
         try {
             InputValidator.validateNumber(surfaceArea);
         }catch (Exception e) {
-            throw new Exception("'Surface area' requires a number, you typed \"" + surfaceArea + "\"");
+            throw new Exception("'Surface area' requires a number, you typed \"" + surfaceArea + "\", original error: " + e.getMessage());
         }
         float surfaceAreaFloat = Float.parseFloat(surfaceArea);
 
@@ -38,8 +38,8 @@ public class CountryController {
         country.setCode(code);
         country.setName(name);
         country.setContinent(continent);
-        country.setSurface_area(surfaceAreaFloat);
-        country.setHead_of_state(headOfState);
+        country.setSurfaceArea(surfaceAreaFloat);
+        country.setHeadOfState(headOfState);
 
         //Calls the repository to prepare the query for the DAO and save the entity on the DB
         CountryRepository repository = new CountryRepository();

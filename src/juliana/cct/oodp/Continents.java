@@ -5,16 +5,12 @@ package juliana.cct.oodp;
  * @author julia
  */
 public enum Continents {
-    ASIAN,
+    ASIA,
     EUROPE,
     NORTH_AMERICA,
     AFRICA,
     OCEANIA,
     ANTARCTICA,
-    SOUTH_AMERICA,
-    CENTRAL_AMERICA
-    
-    
-
+    SOUTH_AMERICA
 }
     

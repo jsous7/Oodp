@@ -11,8 +11,8 @@ public class EntityCountry {
     protected String code;
     protected String name;
     protected String continent;
-    protected Float surface_area;
-    protected String head_of_state;
+    protected Float surfaceArea;
+    protected String headOfState;
 
     public String getCode() {
         return code;
@@ -38,19 +38,19 @@ public class EntityCountry {
         this.continent = continent;
     }
 
-    public Float getSurface_area() {
-        return surface_area;
+    public Float getSurfaceArea() {
+        return surfaceArea;
     }
 
-    public void setSurface_area(Float surface_area) {
-        this.surface_area = surface_area;
+    public void setSurfaceArea(Float surfaceArea) {
+        this.surfaceArea = surfaceArea;
     }
 
-    public String getHead_of_state() {
-        return head_of_state;
+    public String getHeadOfState() {
+        return headOfState;
     }
 
-    public void setHead_of_state(String head_of_state) {
-        this.head_of_state = head_of_state;
+    public void setHeadOfState(String headOfState) {
+        this.headOfState = headOfState;
     }
 }
